@@ -1,30 +1,36 @@
-class SlingShot{
-    constructor(bodyA, pointB){
-        var options = {
-            bodyA: bodyA,
-            pointB: pointB,
-            stiffness: 0.111,
-            length: 0.001
+class Slingshot{
+    constructor(body, anchor){
+        var option={
+            bodyA: body,
+            pointB: anchor,
+            stiffness: 0.01,
+            length: 5
         }
-        this.pointB = pointB
-        this.sling = Constraint.create(options);
-        World.add(world, this.sling);
+        
+        this.bodyA=body
+            this.pointB=anchor
+            this.slingshot=Constraint.create(option)
+            World.add(world,this.slingshot)
+        }
+    
+        attach(body){
+            this.slingshot.bodyA=body;
+        }
+    
+        fly()
+        {
+            this.slingshot.bodyA=null;
+        }
+    
+        display()
+        {
+            if(this.slingshot.bodyA)
+            {
+                var pointA=this.bodyA.position;
+                var pointB=this.pointB
+    
+                strokeWeight(2);		
+                line(pointA.x,pointA.y,pointB.x,pointB.y);
+            }
+        }
     }
-     
-    attach(body){
-        this.sling.bodyA = body;
-    }
-
-    fly(){
-        this.sling.bodyA = null;
-    }
-
-    display(){
-        if(this.sling.bodyA){
-            var pointA = this.sling.bodyA.position;
-            var pointB = this.pointB;
-            strokeWeight(4);
-            line(pointA.x, pointA.y, pointB.x, pointB.y);
-          }
-     }
-}
